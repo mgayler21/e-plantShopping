@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectCartItems,
   selectTotalCost,
-  increaseQty,
-  decreaseQty,
-  deleteItem,
+  updateQuantity,
+  removeItem,
   clearCart,
 } from "./CartSlice";
 import { useNavigate } from "react-router-dom";
@@ -81,20 +80,52 @@ export default function CartItem() {
                           alignItems: "center",
                         }}
                       >
-                        <button onClick={() => dispatch(decreaseQty(plant.id))}>
+                        <button
+                          onClick={() =>
+                            dispatch(updateQuantity({ id: plant.id, qty: qty - 1 }))
+                          }
+                        >
                           -
-                        </button>
-                        <span>Qty: {qty}</span>
-                        <button onClick={() => dispatch(increaseQty(plant.id))}>
-                          +
                         </button>
 
                         <button
-                          onClick={() => dispatch(deleteItem(plant.id))}
+                          onClick={() =>
+                            dispatch(updateQuantity({ id: plant.id, qty: qty - 1 }))
+                          }
+                        >
+                          -
+                        </button>
+
+                        <span>Qty: {qty}</span>
+
+                        <button
+                          onClick={() =>
+                            dispatch(updateQuantity({ id: plant.id, qty: qty + 1 }))
+                          }
+                        >
+                           +
+                        </button>
+
+                        <button
+                          onClick={() => dispatch(removeItem(plant.id))}
                           style={{ marginLeft: "auto" }}
                         >
-                          Delete
+                           Delete
                         </button>
+
+                        <button
+                           onClick={() =>
+                             dispatch(updateQuantity({ id: plant.id, qty: qty + 1 }))
+                            }
+                          >
+                            +
+                          </button>
+                          <button
+                            onClick={() => dispatch(removeItem(plant.id))}
+                            style={{ marginLeft: "auto" }}
+                          >
+                             Delete
+                          </button>
                       </div>
                     </div>
                   </div>
