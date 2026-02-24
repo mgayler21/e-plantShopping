@@ -249,4 +249,19 @@ body {
       .ul div {
         text-align: center; /* Align text to the center */
       }
+    /* --- Overrides for routed ProductList layout --- */
+    .product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    padding: 20px;
+    width: 100%;
+    align-items: stretch;
+    justify-content: center;
+    }
+
+    .product-card {
+    max-width: 320px;
+    flex: 1 1 280px;
+    }  
   }
