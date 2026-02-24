@@ -1,9 +1,11 @@
 import React from "react";
 import "./ProductList.css";
-import { useCart } from "./context/CartContext";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, selectIsInCart } from "./CartSlice";
 
 function ProductList() {
-  const { addToCart, cartList } = useCart();
+  const dispatch = useDispatch();
+  
 
   const plantsArray = [
   {
@@ -84,7 +86,7 @@ function ProductList() {
 
           <div className="product-grid">
             {section.plants.map((plant) => {
-              const inCart = cartList.some((x) => x.plant.id === plant.id);
+              const inCart = useSelector(selectIsInCart(plant.id));
 
               return (
                 <div className="product-card" key={plant.id}>
@@ -102,10 +104,11 @@ function ProductList() {
                 </p>
 
                 <button
-                    className={`product-button ${inCart ? "added-to-cart" : ""}`}
-                    onClick={() => addToCart(plant)}
+                  className={`product-button ${inCart ? "added-to-cart" : ""}`}
+                  onClick={() => dispatch(addToCart(plant))}
+                  disabled={inCart}
                 >
-                     {inCart ? "Added" : "Add to cart"}
+                  {inCart ? "Added" : "Add to cart"}
                 </button>
             </div>
         );

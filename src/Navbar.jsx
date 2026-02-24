@@ -1,9 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { useCart } from "./context/CartContext";
+import { useSelector } from "react-redux";
+import { selectTotalQty } from "./CartSlice";
 import "./Navbar.css";
 
 export default function Navbar() {
-  const { totalQty } = useCart();
+  const totalQty = useSelector(selectTotalQty);
 
   const linkStyle = ({ isActive }) => ({
     textDecoration: "none",
